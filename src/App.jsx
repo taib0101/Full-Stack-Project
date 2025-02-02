@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useCallback, memo } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { HomePage } from "./pages/HomePage.jsx";
 import { AboutPage } from "./pages/AboutPage.jsx";
@@ -8,6 +8,7 @@ import { ServicePage } from "./pages/ServicePage";
 import { ContactPage } from "./pages/ContactPage";
 import DashBoardPage from "./pages/DashBoardPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
 
 export const MenuContext = createContext();
 
@@ -26,18 +27,38 @@ const App = () => {
     };
   }, [handleWindow]);
 
+  const [authentication, setAuthentication] = useState({
+    login: false,
+    username: "",
+  });
+
+  const handleParent = useCallback(({ login, username }) => {
+    setAuthentication({ login, username });
+  });
+
+  console.log("App signUp login :", authentication);
   return (
     <>
       <BrowserRouter>
-        <MenuContext.Provider value={width}>
+        <MenuContext.Provider value={{ width, handleParent }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/service" element={<ServicePage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/dashboard" element={<DashBoardPage />} />
+
+            {authentication ? (
+              <Route path="/dashboard" element={<DashBoardPage />} />
+            ) : (
+              <Route
+                path="/dashboard"
+                element={<Navigate to="/login" replace />}
+              />
+            )}
+
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
           </Routes>
         </MenuContext.Provider>
       </BrowserRouter>

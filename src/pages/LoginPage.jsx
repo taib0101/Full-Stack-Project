@@ -11,16 +11,19 @@ const LoginPage = () => {
 
   return (
     <>
-      <Menu />
-      {value <= 1023 && (
-        <div className={`border-2 fixed w-full bottom-0 left-0`}>
-          <Navber />
-        </div>
-      )}
+      <div>
+        <Menu />
+        {value.width <= 1023 && (
+          <div className={`border-2 fixed w-full bottom-0 left-0 z-[99]`}>
+            <Navber />
+          </div>
+        )}
+      </div>
 
-      <LoginSection />
-
-      <Footer />
+      <div className={`relative top-16 left-0 h-[100dvh] border-8`}>
+        <LoginSection />
+        <Footer />
+      </div>
     </>
   );
 };

@@ -36,7 +36,7 @@ const Menu = () => {
   // console.log("window :", value);
 
   return (
-    <div className={`fixed left-0 top-0 w-full grid grid-cols-2 lg:grid-cols-3 justify-evenly border-4`}>
+    <div className={`fixed left-0 top-0 z-[99] w-full grid grid-cols-2 lg:grid-cols-3 justify-evenly border-4`}>
       <div className={`ml-5 sm:ml-8`}>
         <img
           src="https://cdn-icons-png.flaticon.com/128/1183/1183621.png"
@@ -45,7 +45,7 @@ const Menu = () => {
         />
       </div>
 
-      {value >= 1024 && (
+      {value.width >= 1024 && (
         <nav>
           <Navber />
         </nav>

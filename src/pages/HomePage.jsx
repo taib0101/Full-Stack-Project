@@ -17,14 +17,17 @@ export const HomePage = () => {
   return (
     <div>
       <Menu />
-      {value <= 1023 && (
-        <div className={`border-2 fixed w-full bottom-0 left-0`}>
+      {value.width <= 1023 && (
+        <div className={`border-2 fixed w-full bottom-0 left-0 z-[99]`}>
           <Navber />
         </div>
       )}
-      <Slider />
-      <BlogSection blogs={blogs} />
-      <Footer />
+
+      <div className={`relative top-16 left-0 h-[150dvh]  border-amber-400`}>
+        <Slider />
+        <BlogSection blogs={blogs} />
+        <Footer />
+      </div>
     </div>
   );
 };
