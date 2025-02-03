@@ -18,12 +18,12 @@ export const AboutPage = () => {
     <div>
       <Menu />
       {value.width <= 1023 && (
-        <div className={`border-2 fixed w-full bottom-0 left-0 z-[99]`}>
+        <div className={`fixed w-full bottom-0 left-0 z-[99] bg-white h-[50px]`}>
           <Navber />
         </div>
       )}
 
-      <div className={`h-[100dvh]`}>
+      <div className={`h-[100dvh] h-fit mt-12`}>
         <AboutSection  teamMembers={teamMembers} />
       </div>
       <Footer />

@@ -11,15 +11,13 @@ export const ContactPage = () => {
     <div>
       <Menu />
       {value.width <= 1023 && (
-        <div className={`border-2 fixed w-full bottom-0 left-0 z-[99]`}>
+        <div className={`fixed w-full bottom-0 left-0 z-[99] bg-white h-[50px]`}>
           <Navber />
         </div>
       )}
 
-      <div className={`h-[100dvh]`}>
-        <div className={`relative left-0 top-[60px]`}>
-          <ContactForm />
-        </div>
+      <div className={`h-[100dvh] h-fit`}>
+        <ContactForm />
       </div>
       <Footer />
     </div>

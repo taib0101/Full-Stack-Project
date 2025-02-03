@@ -9,7 +9,7 @@ const DashBoardPage = () => {
     <>
       <Menu />
       {value.width <= 1023 && (
-        <div className={`border-2 fixed w-full bottom-0 left-0`}>
+        <div className={`fixed w-full bottom-0 left-0 bg-white h-[50px]`}>
           <Navber />
         </div>
       )}
