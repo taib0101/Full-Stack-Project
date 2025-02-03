@@ -4,7 +4,7 @@ import { MenuContext } from "../App";
 
 let formValue = {};
 
-const LoginSection = () => {
+const SignUpSection = () => {
   const [signUpValue, setSignUpValue] = useState({
     username: "",
     password: "",
@@ -39,7 +39,7 @@ const LoginSection = () => {
       const data = await response.json();
 
       if (data.description.includes("duplicate")) {
-        window.alert("duplicate username");
+        window.alert("Duplicate username");
         throw new Error("Duplicate");
       }
       value.handleParent({ login: true, username: signUpValue["username"] });
@@ -51,47 +51,58 @@ const LoginSection = () => {
   return (
     <>
       <div
-        className={`h-full flex flex-wrap justify-center items-center bg-amber-400`}
+        className="h-screen flex justify-center items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
       >
         <form
           onSubmit={handleForm}
-          className={`h-[50%] w-[100%] md:w-[50%] bg-blue-500`}
+          className="w-full sm:w-[450px] bg-white rounded-xl shadow-lg p-8 space-y-6"
         >
-          <div className={`h-[10%]`}>
-            <NavLink to="/login">Back</NavLink>
-          </div>
+          <h2 className="text-2xl font-semibold text-center text-gray-800">Sign Up</h2>
 
-          <div className={`flex justify-center items-center h-[30%]`}>
+          <div className="flex flex-col space-y-4">
             <input
               name="username"
               onChange={handleInput}
               value={signUpValue["username"]}
               type="text"
-              className={`h-fit border-2 bg-[#F2F2F2]`}
+              className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="User Name"
               required
             />
-          </div>
 
-          <div className={`flex justify-center items-center h-[30%]`}>
             <input
               name="password"
               onChange={handleInput}
               value={signUpValue["password"]}
               type="password"
-              className={`h-fit border-2 bg-[#F2F2F2]`}
+              className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Password"
               required
             />
           </div>
 
-          <div className={`flex justify-center items-center h-[30%]`}>
+          <div className="flex justify-center">
             <button
               type="submit"
-              className={`bg-[#1F2937] text-white font-bold h-fit py-2 px-[5.2px] sm:px-4 rounded-lg w-[40%] cursor-pointer`}
+              className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300"
             >
               Sign Up
             </button>
+          </div>
+
+          <div className="flex justify-center text-center text-gray-600">
+            <p>
+              Already have an account?{" "}
+              <NavLink to="/login" className="text-indigo-600 hover:text-indigo-700">
+                Login
+              </NavLink>
+            </p>
+          </div>
+
+          <div className="text-center text-gray-600 mt-4">
+            <NavLink to="/login" className="text-indigo-600 hover:text-indigo-700">
+              Back
+            </NavLink>
           </div>
         </form>
       </div>
@@ -99,4 +110,4 @@ const LoginSection = () => {
   );
 };
 
-export default memo(LoginSection);
+export default memo(SignUpSection);
