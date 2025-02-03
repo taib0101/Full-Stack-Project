@@ -20,7 +20,7 @@ const LoginPage = () => {
         )}
       </div>
 
-      <div className={`relative top-16 left-0 h-[100dvh] border-8`}>
+      <div className={`h-[100dvh]`}>
         <LoginSection />
         <Footer />
       </div>

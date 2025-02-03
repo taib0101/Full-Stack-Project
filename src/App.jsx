@@ -36,28 +36,31 @@ const App = () => {
     setAuthentication({ login, username });
   });
 
-  console.log("App signUp login :", authentication);
+  // console.log("App signUp login :", authentication);
   return (
     <>
       <BrowserRouter>
-        <MenuContext.Provider value={{ width, handleParent }}>
+        <MenuContext.Provider value={{ width, authentication, handleParent }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/service" element={<ServicePage />} />
             <Route path="/contact" element={<ContactPage />} />
-
-            {authentication ? (
-              <Route path="/dashboard" element={<DashBoardPage />} />
-            ) : (
-              <Route
-                path="/dashboard"
-                element={<Navigate to="/login" replace />}
-              />
-            )}
-
-            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/dashboard"
+              element={authentication.login ? <DashBoardPage /> : <LoginPage />}
+            />
+            <Route
+              path="/login"
+              element={
+                authentication.login ? (
+                  <Navigate to="/" element={<HomePage />} replace />
+                ) : (
+                  <LoginPage />
+                )
+              }
+            />
             <Route path="/signup" element={<SignUpPage />} />
           </Routes>
         </MenuContext.Provider>

@@ -16,10 +16,12 @@ export const ContactPage = () => {
         </div>
       )}
 
-      <div className={`relative top-16 left-0 h-[150dvh]  border-amber-400`}>
-        <ContactForm />
-        <Footer />
+      <div className={`h-[100dvh]`}>
+        <div className={`relative left-0 top-[60px]`}>
+          <ContactForm />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

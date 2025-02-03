@@ -35,8 +35,15 @@ const Menu = () => {
 
   // console.log("window :", value);
 
+  const handleLoginOut = () => {
+    if (value.authentication.login)
+      value.handleParent({ login: false, username: "" });
+  };
+
   return (
-    <div className={`fixed left-0 top-0 z-[99] w-full grid grid-cols-2 lg:grid-cols-3 justify-evenly border-4`}>
+    <div
+      className={`fixed left-0 top-0 z-[99] w-full grid grid-cols-2 lg:grid-cols-3 justify-evenly border-4`}
+    >
       <div className={`ml-5 sm:ml-8`}>
         <img
           src="https://cdn-icons-png.flaticon.com/128/1183/1183621.png"
@@ -64,9 +71,10 @@ const Menu = () => {
 
         <NavLink to="/login">
           <button
+            onClick={handleLoginOut}
             className={`bg-[#DC2626] text-white font-bold h-full py-2 px-[5.2px] sm:px-4 rounded-full cursor-pointer`}
           >
-            Login
+            {value.authentication.login ? "LogOut" : "LogIn"}
           </button>
         </NavLink>
       </div>

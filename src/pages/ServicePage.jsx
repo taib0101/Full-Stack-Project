@@ -22,10 +22,12 @@ export const ServicePage = () => {
         </div>
       )}
 
-      <div className={`relative top-16 left-0 h-[150dvh]  border-amber-400`}>
-        <ServiceSection services={services} />
-        <Footer />
+      <div className={`h-[100dvh]`}>
+        <div className={`relative left-0 top-[60px]`}>
+          <ServiceSection services={services} />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

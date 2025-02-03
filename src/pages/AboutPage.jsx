@@ -23,11 +23,13 @@ export const AboutPage = () => {
         </div>
       )}
 
-      <div className={`relative top-16 left-0 h-[150dvh]  border-amber-400`}>
-        <AboutSection />
-        <TeamSection teamMembers={teamMembers} />
-        <Footer />
+      <div className={`h-[100dvh]`}>
+        <div className={`relative left-0 top-[60px]`}>
+          <AboutSection />
+          <TeamSection teamMembers={teamMembers} />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

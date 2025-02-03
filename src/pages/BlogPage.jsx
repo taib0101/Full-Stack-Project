@@ -6,9 +6,12 @@ import { Footer } from "../components/Footer";
 
 export const BlogPage = () => {
   const blogs = [
-    { title: "Blog 1", content: "This is the first blog." },
-    { title: "Blog 2", content: "This is the second blog." },
-    // Add more blogs dynamically
+    { title: 'Blog Post 1', description: 'Short description of blog post 1.' },
+    { title: 'Blog Post 2', description: 'Short description of blog post 2.' },
+    { title: 'Blog Post 3', description: 'Short description of blog post 3.' },
+    { title: 'Blog Post 4', description: 'Short description of blog post 4.' },
+    { title: 'Blog Post 5', description: 'Short description of blog post 5.' },
+    { title: 'Blog Post 6', description: 'Short description of blog post 6.' },
   ];
 
   const value = useContext(MenuContext);
@@ -22,10 +25,12 @@ export const BlogPage = () => {
         </div>
       )}
 
-      <div className={`relative top-16 left-0 h-[150dvh]  border-amber-400`}>
-        <BlogSection blogs={blogs} />
-        <Footer />
+      <div className={`h-[100dvh]`}>
+        <div className={`relative left-0 top-[60px]`}>
+          <BlogSection blogs={blogs} />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
