@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import Menu, { Navber } from "../components/Menu";
 import { MenuContext } from "../App";
-import { AboutSection } from "../components/AboutSection";
-import { TeamSection } from "../components/TeamSection";
+import { AboutSection } from "../components/AboutTeamSection";
 import { Footer } from "../components/Footer";
 
 export const AboutPage = () => {
   const teamMembers = [
     { name: "John Doe", role: "CEO" },
     { name: "Jane Smith", role: "CTO" },
-    // Add more team members dynamically
+    { name: "Alice Johnson", role: "Designer" },
+    { name: "Bob Brown", role: "Developer" },
   ];
 
   const value = useContext(MenuContext);
@@ -24,10 +24,7 @@ export const AboutPage = () => {
       )}
 
       <div className={`h-[100dvh]`}>
-        <div className={`relative left-0 top-[60px]`}>
-          <AboutSection />
-          <TeamSection teamMembers={teamMembers} />
-        </div>
+        <AboutSection  teamMembers={teamMembers} />
       </div>
       <Footer />
     </div>

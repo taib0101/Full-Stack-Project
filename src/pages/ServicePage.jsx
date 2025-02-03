@@ -6,9 +6,9 @@ import { Footer } from "../components/Footer";
 
 export const ServicePage = () => {
   const services = [
-    { title: "Service 1", description: "This is the first service." },
-    { title: "Service 2", description: "This is the second service." },
-    // Add more services dynamically
+    { name: "Web Development", description: "Build modern web applications." },
+    { name: "UI/UX Design", description: "Create beautiful user interfaces." },
+    { name: "SEO Optimization", description: "Improve website ranking." },
   ];
 
   const value = useContext(MenuContext);
@@ -23,9 +23,7 @@ export const ServicePage = () => {
       )}
 
       <div className={`h-[100dvh]`}>
-        <div className={`relative left-0 top-[60px]`}>
-          <ServiceSection services={services} />
-        </div>
+        <ServiceSection services={services} />
       </div>
       <Footer />
     </div>
