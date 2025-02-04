@@ -1,7 +1,7 @@
 import { useState, memo, useCallback } from "react";
 import CRUDForm from "./CRUDForm";
 
-const TeamContent = () => {
+const ServiceContent = () => {
   const [items, setItems] = useState([
     {
       id: 1,
@@ -44,10 +44,10 @@ const TeamContent = () => {
 
   return (
     <div className={`container mx-auto p-4`}>
-      <CRUDForm showFormObject={{ showForm, setShowForm }} content={"Team"} />
+      <CRUDForm showFormObject={{ showForm, setShowForm }} content={"Service"} />
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4`}>
         <div className={`p-4 border rounded-lg shadow-lg`}>
-          <h2 className={`text-lg font-semibold mb-2`}>Team Content</h2>
+          <h2 className={`text-lg font-semibold mb-2`}>Service Content</h2>
           <div className={`space-y-4`}>
             <div className={`p-4 border rounded-lg shadow`}>
               {items.map((item, index) => (
@@ -78,12 +78,12 @@ const TeamContent = () => {
           </div>
         </div>
         <div className="p-4 border rounded-lg shadow-lg flex flex-col items-center justify-center">
-          <h2 className="text-lg font-semibold mb-4">Add New Team</h2>
+          <h2 className="text-lg font-semibold mb-4">Add New Service</h2>
           <button
             onClick={addItem}
             className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
           >
-            + Add Team
+            + Add Service
           </button>
         </div>
       </div>
@@ -91,4 +91,4 @@ const TeamContent = () => {
   );
 };
 
-export default memo(TeamContent);
+export default memo(ServiceContent);

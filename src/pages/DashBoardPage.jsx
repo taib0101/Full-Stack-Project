@@ -4,6 +4,7 @@ import { MenuContext } from "../App";
 import { Footer } from "../components/Footer";
 import BlogContent from "../components/DashBoard Component/BlogContent";
 import TeamContent from "../components/DashBoard Component/TeamContent";
+import ServiceContent from "../components/DashBoard Component/ServiceContent";
 
 
 const DashBoardPage = () => {
@@ -20,6 +21,7 @@ const DashBoardPage = () => {
       <div className={`h-[100dvh] h-fit border-4`}>
         <BlogContent />
         <TeamContent />
+        <ServiceContent />
       </div>
       <Footer />
     </>
