@@ -34,7 +34,7 @@ const App = () => {
 
   const handleParent = useCallback(({ login, username }) => {
     setAuthentication({ login, username });
-  });
+  }, [setAuthentication]);
 
   // console.log("App signUp login :", authentication);
   return (

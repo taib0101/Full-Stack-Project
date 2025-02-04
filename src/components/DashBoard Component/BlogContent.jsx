@@ -1,7 +1,7 @@
 import { useState, memo, useCallback } from "react";
+import CRUDForm from "./CRUDForm";
 
-
-const ItemList = () => {
+const BlogContent = () => {
   const [items, setItems] = useState([
     {
       id: 1,
@@ -11,22 +11,37 @@ const ItemList = () => {
     { id: 2, name: "Item 2", description: "Description 2" },
   ]);
 
-  const updateItem = (event) => {
+  const [showForm, setShowForm] = useState({
+    formClicked: false,
+    addUpdate: "",
+  });
+
+  const updateItem = useCallback((event) => {
     console.log("update this bro");
-  };
+    setShowForm({
+      formClicked: true,
+      addUpdate: "Update",
+    });
+  }, [setShowForm]);
+  
   const deleteItem = (event) => {
     console.log("delete this bro");
   };
 
-  const addItem = (event) => {
-    console.log("add bro");
-  };
+  const addItem = useCallback((event) => {
+    // console.log("add bro");
+    setShowForm({
+      formClicked: true,
+      addUpdate: "Add",
+    });
+  }, [setShowForm]);
 
   return (
     <div className={`container mx-auto p-4`}>
+      <CRUDForm showFormObject={{ showForm, setShowForm }} content={"Blog"} />
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4`}>
         <div className={`p-4 border rounded-lg shadow-lg`}>
-          <h2 className={`text-lg font-semibold mb-2`}>Items</h2>
+          <h2 className={`text-lg font-semibold mb-2`}>Blog Content</h2>
           <div className={`space-y-4`}>
             <div className={`p-4 border rounded-lg shadow`}>
               {items.map((item, index) => (
@@ -57,12 +72,12 @@ const ItemList = () => {
           </div>
         </div>
         <div className="p-4 border rounded-lg shadow-lg flex flex-col items-center justify-center">
-          <h2 className="text-lg font-semibold mb-4">Add New Item</h2>
+          <h2 className="text-lg font-semibold mb-4">Add New Blog</h2>
           <button
             onClick={addItem}
             className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
           >
-            + Add Item
+            + Add Blog
           </button>
         </div>
       </div>
@@ -70,4 +85,4 @@ const ItemList = () => {
   );
 };
 
-export default memo(ItemList);
+export default memo(BlogContent);

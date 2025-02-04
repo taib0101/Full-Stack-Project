@@ -1,4 +1,4 @@
-import { memo, useContext, useState } from "react";
+import { memo, useCallback, useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MenuContext } from "../App";
 
@@ -10,18 +10,18 @@ const SignUpSection = () => {
     password: "",
   });
 
-  const handleInput = (event) => {
+  const handleInput = useCallback((event) => {
     event.preventDefault();
     setSignUpValue({
       ...signUpValue,
       [event.target.name]: event.target.value,
     });
     formValue[event.target.name] = event.target.value;
-  };
+  }, [signUpValue, setSignUpValue]);
 
   const value = useContext(MenuContext);
 
-  const handleForm = async (event) => {
+  const handleForm = useCallback(async (event) => {
     event.preventDefault();
 
     const payload = {
@@ -46,7 +46,7 @@ const SignUpSection = () => {
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }, [signUpValue, value]);
 
   return (
     <>

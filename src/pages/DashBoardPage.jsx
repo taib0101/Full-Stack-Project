@@ -2,7 +2,8 @@ import { memo, useContext } from "react";
 import Menu, { Navber } from "../components/Menu";
 import { MenuContext } from "../App";
 import { Footer } from "../components/Footer";
-import ItemList from "../components/ItemList";
+import BlogContent from "../components/DashBoard Component/BlogContent";
+import TeamContent from "../components/DashBoard Component/TeamContent";
 
 
 const DashBoardPage = () => {
@@ -16,8 +17,9 @@ const DashBoardPage = () => {
         </div>
       )}
 
-      <div className={`h-[100dvh] border-4`}>
-        <ItemList />
+      <div className={`h-[100dvh] h-fit border-4`}>
+        <BlogContent />
+        <TeamContent />
       </div>
       <Footer />
     </>
