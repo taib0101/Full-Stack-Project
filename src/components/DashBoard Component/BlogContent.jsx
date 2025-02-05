@@ -4,6 +4,11 @@ import { MenuContext } from "../../App";
 
 const BlogContent = () => {
   let [items, setItems] = useState([]);
+  const [showForm, setShowForm] = useState({
+    formClicked: false,
+    addUpdate: "",
+    formValue: {}
+  });
   const valuee = useContext(MenuContext);
 
   const readBlog = useCallback(async () => {
@@ -20,6 +25,7 @@ const BlogContent = () => {
         if (fetchedData.status === "error")
           throw new Error(fetchedData.description);
 
+        console.log("fecthed array :", fetchedData.array);
         setItems(fetchedData.array);
       } else {
         setItems([
@@ -38,23 +44,22 @@ const BlogContent = () => {
   useEffect(() => {
     readBlog();
   }, [readBlog])
-  console.log("user name :", valuee);
+  // console.log("user name :", valuee);
 
-  const [showForm, setShowForm] = useState({
-    formClicked: false,
-    addUpdate: "",
-  });
+  // console.log("team id :", items[0]);
 
-  const updateItem = useCallback(
-    (event) => {
-      console.log("update this bro");
-      setShowForm({
-        formClicked: true,
-        addUpdate: "Update",
-      });
-    },
-    [setShowForm]
-  );
+  const updateItem = (id, name, description) => {
+    console.log("update this bro");
+    setShowForm({
+      formClicked: true,
+      addUpdate: "Update",
+      formValue: {
+        id,
+        name,
+        description
+      }
+    });
+  }
 
   const deleteItem = (event) => {
     console.log("delete this bro");
@@ -66,6 +71,7 @@ const BlogContent = () => {
       setShowForm({
         formClicked: true,
         addUpdate: "Add",
+        formValue: {}
       });
     },
     [setShowForm]
@@ -89,7 +95,7 @@ const BlogContent = () => {
                   </div>
                   <div className={`flex items-center justify-center gap-2`}>
                     <button
-                      onClick={updateItem}
+                      onClick={() => updateItem(item._id, item.name, item.description)}
                       className={`bg-green-600 hover:bg-green-900 text-white font-bold py-2 px-4 rounded mr-2 h-fit`}
                     >
                       Update

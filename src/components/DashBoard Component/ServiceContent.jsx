@@ -38,7 +38,7 @@ const ServiceContent = () => {
     useEffect(() => {
       readService();
     }, [readService])
-    console.log("user name :", valuee);
+    // console.log("user name :", valuee);
 
   const [showForm, setShowForm] = useState({
     formClicked: false,

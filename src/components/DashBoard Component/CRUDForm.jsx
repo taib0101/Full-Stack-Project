@@ -1,23 +1,28 @@
-import { memo, useCallback, useContext, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
 import { MenuContext } from "../../App";
 
 const CRUDForm = ({ showFormObject, content, readData }) => {
   // console.log(content);
-
-  const valuee = useContext(MenuContext)
-
-  const [value, setValue] = useState({
-    name: "",
-    description: "",
-  });
+  const menuContextValue = useContext(MenuContext);
+  const [value, setValue] = useState({});
   const { showForm, setShowForm } = showFormObject;
 
-  const handleCloseForm = useCallback(() => {
-    setShowForm({
-      formClicked: false,
-      addUpdate: "",
-    });
-  }, [setShowForm]);
+  useEffect(() => {
+    if (showForm.addUpdate === "Update") {
+      setValue({
+        ...value,
+        name: showForm.formValue.name,
+        description: showForm.formValue.description,
+      });
+    } else {
+      setValue({
+        name: "",
+        description: "",
+      });
+    }
+    // console.log("bro it didn't update formValue", showForm);
+    // console.log("bro it didn't update value", value);
+  }, [showForm]);
 
   const handleInput = useCallback(
     (event) => {
@@ -29,44 +34,59 @@ const CRUDForm = ({ showFormObject, content, readData }) => {
     [value, setValue]
   );
   let globalValue = value;
-  globalValue.username = valuee.authentication.username;
+  // globalValue.username = menuContextValue.authentication.username;
 
   // console.log(`${content}`);
   // console.log(value);
   // console.log("global :", globalValue);
 
-  const handleSubmit = useCallback(async (event) => {
-    event.preventDefault();
-    console.log("Form submitted!");
+  const handleCloseForm = useCallback(() => {
+    setShowForm({
+      formClicked: false,
+      addUpdate: "",
+      formValue: {},
+    });
+  }, [setShowForm]);
 
-    let url = "http://127.0.0.1:3000/create/"
-    let payload = {
-      method: "post",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(globalValue)
-    }
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      console.log("Form submitted!");
 
-    try {
-      url += content.toLowerCase();
-      console.log("url :", url);
-      
-      const response = await fetch(url, payload);
-      const fetchedDetails = await response.json();
+      let url;
+      let payload = {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(globalValue),
+      };
 
-      if(fetchedDetails.status === "error") throw new Error(fetchedDetails.description)
-      readData();
-    } catch(error) {
-      window.alert(error.message);
-    }
+      showForm.addUpdate === "Update"
+        ? (url = `http://127.0.0.1:3000/update/${content.toLowerCase}/${showForm.formValue.id}?username=${menuContextValue.authentication.username}`)
+        : (url = `http://127.0.0.1:3000/create/${content.toLowerCase()}?username=${menuContextValue.authentication.username}`);
 
-    handleCloseForm();
-    setValue({
-      name: "",
-      description: "",
-    }, [setValue]);
-  }, [content, globalValue, handleCloseForm, readData]);
+      try {
+        console.log("url :", url);
+
+        const response = await fetch(url, payload);
+        const fetchedDetails = await response.json();
+
+        if (fetchedDetails.status === "error")
+          throw new Error(fetchedDetails.description);
+        readData();
+      } catch (error) {
+        window.alert(error.message);
+      }
+
+      handleCloseForm();
+      setValue({
+        name: "",
+        description: "",
+      });
+    },
+    [content, globalValue, handleCloseForm, readData, showForm]
+  );
 
   return (
     <div className="p-4">

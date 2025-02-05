@@ -39,7 +39,7 @@ const TeamContent = () => {
     useEffect(() => {
       readTeam();
     }, [readTeam])
-    console.log("user name :", valuee);
+    // console.log("user name :", valuee);
 
   const [showForm, setShowForm] = useState({
     formClicked: false,
