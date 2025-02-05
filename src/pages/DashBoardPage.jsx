@@ -6,22 +6,23 @@ import BlogContent from "../components/DashBoard Component/BlogContent";
 import TeamContent from "../components/DashBoard Component/TeamContent";
 import ServiceContent from "../components/DashBoard Component/ServiceContent";
 
-
 const DashBoardPage = () => {
   const value = useContext(MenuContext);
   return (
     <>
-      {/* <Menu /> */}
+      <Menu />
       {value.width <= 1023 && (
         <div className={`fixed w-full bottom-0 left-0 bg-white h-[50px]`}>
           <Navber />
         </div>
       )}
 
-      <div className={`h-[100dvh] h-fit border-4`}>
-        <BlogContent />
-        <TeamContent />
-        <ServiceContent />
+      <div className={`pt-12`}>
+        <div className={`h-[100dvh] h-fit`}>
+          <BlogContent />
+          <TeamContent />
+          <ServiceContent />
+        </div>
       </div>
       <Footer />
     </>

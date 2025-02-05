@@ -15,7 +15,7 @@ export const BlogSection = ({ blogs }) => {
             key={index}
             className="flex-shrink-0 w-64 bg-white rounded-lg shadow-md p-6"
           >
-            <h3 className="font-bold text-xl mb-2">{item.title}</h3>
+            <h3 className="font-bold text-xl mb-2">{item.name}</h3>
             <p className="text-gray-700 text-base">{item.description}</p>
           </div>
         ))}

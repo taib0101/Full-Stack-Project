@@ -1,11 +1,7 @@
-export const AboutSection = () => {
-  const teamMembers = [
-    { name: "John Doe", role: "CEO" },
-    { name: "Jane Smith", role: "CTO" },
-    { name: "Alice Johnson", role: "Designer" },
-    { name: "Bob Brown", role: "Developer" },
-  ];
+import { useContext, useEffect, useState } from "react";
+import { MenuContext } from "../App";
 
+export const AboutSection = ({ teamMembers }) => {
   return (
     <div className="container mx-auto p-6">
       {/* About Section */}
@@ -37,7 +33,7 @@ export const AboutSection = () => {
               className="bg-white p-4 rounded-lg shadow-lg text-center"
             >
               <h3 className="text-xl font-semibold">{member.name}</h3>
-              <p className="text-gray-600">{member.role}</p>
+              <p className="text-gray-600">{member.description}</p>
             </div>
           ))}
         </div>
