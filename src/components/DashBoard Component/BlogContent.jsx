@@ -9,19 +9,19 @@ const BlogContent = () => {
     addUpdate: "",
     formValue: {}
   });
-  const valuee = useContext(MenuContext);
+  const menuContextValue = useContext(MenuContext);
 
   const readBlog = useCallback(async () => {
     try {
-      if (valuee.authentication.login) {
-        const url = `http://127.0.0.1:3000/read/blog?username=${valuee.authentication.username}`;
+      if (menuContextValue.authentication.login) {
+        const url = `http://127.0.0.1:3000/read/blog?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };
         const response = await fetch(url, payload);
         const fetchedData = await response.json();
 
-        console.log("fetched data :", fetchedData);
+        // console.log("fetched data :", fetchedData);
         if (fetchedData.status === "error")
           throw new Error(fetchedData.description);
 
@@ -39,16 +39,16 @@ const BlogContent = () => {
     } catch (error) {
       window.alert(error.message);
     }
-  }, [valuee]);
+  }, [menuContextValue.authentication]);
 
   useEffect(() => {
     readBlog();
   }, [readBlog])
-  // console.log("user name :", valuee);
+  // console.log("user name :", menuContextValue);
 
   // console.log("team id :", items[0]);
 
-  const updateItem = (id, name, description) => {
+  const updateItem = useCallback((id, name, description) => {
     console.log("update this bro");
     setShowForm({
       formClicked: true,
@@ -59,10 +59,27 @@ const BlogContent = () => {
         description
       }
     });
-  }
+  }, [setShowForm]);
 
-  const deleteItem = (event) => {
+  const deleteItem = async (id) => {
     console.log("delete this bro");
+
+    try {
+      const url = `http://127.0.0.1:3000/delete/blog/${id}?username=${menuContextValue.authentication.username}`;
+        const payload = {
+          method: "get",
+        };
+        const response = await fetch(url, payload);
+        const fetchedData = await response.json();
+
+        console.log("fetched data :", fetchedData);
+        if (fetchedData.status === "error")
+          throw new Error(fetchedData.description);
+
+        readBlog();
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
 
   const addItem = useCallback(
@@ -101,7 +118,7 @@ const BlogContent = () => {
                       Update
                     </button>
                     <button
-                      onClick={deleteItem}
+                      onClick={() => deleteItem(item._id)}
                       className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-fit`}
                     >
                       Delete

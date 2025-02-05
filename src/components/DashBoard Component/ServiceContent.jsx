@@ -4,60 +4,82 @@ import { MenuContext } from "../../App";
 
 const ServiceContent = () => {
   let [items, setItems] = useState([]);
-    const valuee = useContext(MenuContext);
-  
-    const readService = useCallback(async () => {
-      try {
-        if (valuee.authentication.login) {
-          const url = `http://127.0.0.1:3000/read/service?username=${valuee.authentication.username}`;
-          const payload = {
-            method: "get",
-          };
-          const response = await fetch(url, payload);
-          const fetchedData = await response.json();
-  
-          console.log("fetched data :", fetchedData);
-          if (fetchedData.status === "error")
-            throw new Error(fetchedData.description);
-  
-          setItems(fetchedData.array);
-        } else {
-          setItems([
-            {
-              name: "Item 1",
-              description: "Description 1",
-            },
-            { name: "Item 2", description: "Description 2" },
-          ]);
-        }
-      } catch (error) {
-        window.alert(error.message);
-      }
-    }, [valuee]);
-  
-    useEffect(() => {
-      readService();
-    }, [readService])
-    // console.log("user name :", valuee);
-
   const [showForm, setShowForm] = useState({
     formClicked: false,
     addUpdate: "",
+    formValue: {}
   });
+  const menuContextValue = useContext(MenuContext);
 
-  const updateItem = useCallback(
-    (event) => {
-      console.log("update this bro");
-      setShowForm({
-        formClicked: true,
-        addUpdate: "Update",
-      });
-    },
-    [setShowForm]
-  );
+  const readService = useCallback(async () => {
+    try {
+      if (menuContextValue.authentication.login) {
+        const url = `http://127.0.0.1:3000/read/service?username=${menuContextValue.authentication.username}`;
+        const payload = {
+          method: "get",
+        };
+        const response = await fetch(url, payload);
+        const fetchedData = await response.json();
 
-  const deleteItem = (event) => {
+        // console.log("fetched data :", fetchedData);
+        if (fetchedData.status === "error")
+          throw new Error(fetchedData.description);
+
+        console.log("fecthed array :", fetchedData.array);
+        setItems(fetchedData.array);
+      } else {
+        setItems([
+          {
+            name: "Item 1",
+            description: "Description 1",
+          },
+          { name: "Item 2", description: "Description 2" },
+        ]);
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  }, [menuContextValue.authentication]);
+
+  useEffect(() => {
+    readService();
+  }, [readService])
+  // console.log("user name :", menuContextValue);
+
+  // console.log("team id :", items[0]);
+
+  const updateItem = (id, name, description) => {
+    console.log("update this bro");
+    setShowForm({
+      formClicked: true,
+      addUpdate: "Update",
+      formValue: {
+        id,
+        name,
+        description
+      }
+    });
+  }
+
+  const deleteItem = async (id) => {
     console.log("delete this bro");
+
+    try {
+      const url = `http://127.0.0.1:3000/delete/service/${id}?username=${menuContextValue.authentication.username}`;
+        const payload = {
+          method: "get",
+        };
+        const response = await fetch(url, payload);
+        const fetchedData = await response.json();
+
+        console.log("fetched data :", fetchedData);
+        if (fetchedData.status === "error")
+          throw new Error(fetchedData.description);
+
+        readService();
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
 
   const addItem = useCallback(
@@ -89,13 +111,13 @@ const ServiceContent = () => {
                   </div>
                   <div className={`flex items-center justify-center gap-2`}>
                     <button
-                      onClick={updateItem}
+                      onClick={() => updateItem(item._id, item.name, item.description)}
                       className={`bg-green-600 hover:bg-green-900 text-white font-bold py-2 px-4 rounded mr-2 h-fit`}
                     >
                       Update
                     </button>
                     <button
-                      onClick={deleteItem}
+                      onClick={() => deleteItem(item._id)}
                       className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-fit`}
                     >
                       Delete

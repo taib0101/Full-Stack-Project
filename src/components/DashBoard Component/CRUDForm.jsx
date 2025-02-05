@@ -34,7 +34,7 @@ const CRUDForm = ({ showFormObject, content, readData }) => {
     [value, setValue]
   );
   let globalValue = value;
-  // globalValue.username = menuContextValue.authentication.username;
+  if (showForm.addUpdate === "Update") globalValue.id = showForm.formValue.id;
 
   // console.log(`${content}`);
   // console.log(value);
@@ -63,8 +63,12 @@ const CRUDForm = ({ showFormObject, content, readData }) => {
       };
 
       showForm.addUpdate === "Update"
-        ? (url = `http://127.0.0.1:3000/update/${content.toLowerCase}/${showForm.formValue.id}?username=${menuContextValue.authentication.username}`)
-        : (url = `http://127.0.0.1:3000/create/${content.toLowerCase()}?username=${menuContextValue.authentication.username}`);
+        ? (url = `http://127.0.0.1:3000/update/${content.toLowerCase()}/${
+            showForm.formValue.id
+          }?username=${menuContextValue.authentication.username}`)
+        : (url = `http://127.0.0.1:3000/create/${content.toLowerCase()}?username=${
+            menuContextValue.authentication.username
+          }`);
 
       try {
         console.log("url :", url);
@@ -85,7 +89,14 @@ const CRUDForm = ({ showFormObject, content, readData }) => {
         description: "",
       });
     },
-    [content, globalValue, handleCloseForm, readData, showForm]
+    [
+      content,
+      globalValue,
+      handleCloseForm,
+      readData,
+      showForm,
+      menuContextValue,
+    ]
   );
 
   return (
