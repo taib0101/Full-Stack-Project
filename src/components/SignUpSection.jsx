@@ -36,9 +36,9 @@ const SignUpSection = () => {
 
     try {
       const response = await fetch(url, payload);
-      const data = await response.json();
+      const fetchedData = await response.json();
 
-      if (data.description.includes("duplicate")) {
+      if (fetchedData.description.includes("duplicate")) {
         window.alert("Duplicate username");
         throw new Error("Duplicate");
       }

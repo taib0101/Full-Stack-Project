@@ -37,14 +37,14 @@ const LoginSection = () => {
 
     try {
       const response = await fetch(url, payload);
-      const data = await response.json();
+      const fetchedData = await response.json();
 
-      if (data.status === "error") {
+      if (fetchedData.status === "error") {
         setWarning(true);
         setTimeout(() => setWarning(false), 2000);
-        throw new Error(data.description);
+        throw new Error(fetchedData.description);
       }
-      console.log("data :", data);
+      console.log("fetchedData :", fetchedData);
 
       value.handleParent({ login: true, username: loginValue["username"] });
     } catch (error) {

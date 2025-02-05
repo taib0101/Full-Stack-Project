@@ -1,44 +1,79 @@
-import { useState, memo, useCallback } from "react";
+import { useState, memo, useCallback, useEffect, useContext } from "react";
 import CRUDForm from "./CRUDForm";
+import { MenuContext } from "../../App";
 
 const BlogContent = () => {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Item 1",
-      description: "Description 1",
-    },
-    { id: 2, name: "Item 2", description: "Description 2" },
-  ]);
+  let [items, setItems] = useState([]);
+  const valuee = useContext(MenuContext);
+
+  const readBlog = useCallback(async () => {
+    try {
+      if (valuee.authentication.login) {
+        const url = `http://127.0.0.1:3000/read/blog?username=${valuee.authentication.username}`;
+        const payload = {
+          method: "get",
+        };
+        const response = await fetch(url, payload);
+        const fetchedData = await response.json();
+
+        console.log("fetched data :", fetchedData);
+        if (fetchedData.status === "error")
+          throw new Error(fetchedData.description);
+
+        setItems(fetchedData.array);
+      } else {
+        setItems([
+          {
+            name: "Item 1",
+            description: "Description 1",
+          },
+          { name: "Item 2", description: "Description 2" },
+        ]);
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  }, [valuee]);
+
+  useEffect(() => {
+    readBlog();
+  }, [readBlog])
+  console.log("user name :", valuee);
 
   const [showForm, setShowForm] = useState({
     formClicked: false,
     addUpdate: "",
   });
 
-  const updateItem = useCallback((event) => {
-    console.log("update this bro");
-    setShowForm({
-      formClicked: true,
-      addUpdate: "Update",
-    });
-  }, [setShowForm]);
-  
+  const updateItem = useCallback(
+    (event) => {
+      console.log("update this bro");
+      setShowForm({
+        formClicked: true,
+        addUpdate: "Update",
+      });
+    },
+    [setShowForm]
+  );
+
   const deleteItem = (event) => {
     console.log("delete this bro");
   };
 
-  const addItem = useCallback((event) => {
-    // console.log("add bro");
-    setShowForm({
-      formClicked: true,
-      addUpdate: "Add",
-    });
-  }, [setShowForm]);
+  const addItem = useCallback(
+    (event) => {
+      // console.log("add bro");
+      setShowForm({
+        formClicked: true,
+        addUpdate: "Add",
+      });
+    },
+    [setShowForm]
+  );
 
   return (
     <div className={`container mx-auto p-4`}>
-      <CRUDForm showFormObject={{ showForm, setShowForm }} content={"Blog"} />
+      <CRUDForm showFormObject={{ showForm, setShowForm }} content={"Blog"} readData={readBlog} />
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4`}>
         <div className={`p-4 border rounded-lg shadow-lg`}>
           <h2 className={`text-lg font-semibold mb-2`}>Blog Content</h2>
