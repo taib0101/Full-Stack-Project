@@ -1,0 +1,25 @@
+frontend: https://projectostad.netlify.app/
+backend: https://projectbackendos-phi.vercel.app/
+
+
+1.frontend part 
+   live link: https://projectostad.netlify.app/
+   github link: https://github.com/taib0101/Assignmen05-Frontend
+   
+   backend github link: https://github.com/taib0101/Assignmen05-Backend
+
+   1.1 install
+       $ npm install
+   1.2 run
+       $ npm run dev
+   1.3 build distribution(Dist)
+       $ npm run build
+
+   2.1 configure netlify.toml
+       $ nano path/to/destination/netlify.toml
+
+   2.2 upload to netlify by drag and drop
+
+2.backend part
+   live link: https://projectbackendos-phi.vercel.app/
+   github link: https://github.com/taib0101/Assignmen05-Backend 
