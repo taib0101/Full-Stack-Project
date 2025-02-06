@@ -32,7 +32,7 @@ const SignUpSection = () => {
       body: JSON.stringify(formValue),
     };
 
-    const url = "http://127.0.0.1:3000/signup";
+    const url = "https://projectbackendos-phi.vercel.app/signup";
 
     try {
       const response = await fetch(url, payload);

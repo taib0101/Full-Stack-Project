@@ -14,7 +14,7 @@ const TeamContent = () => {
   const readTeam = useCallback(async () => {
     try {
       if (menuContextValue.authentication.login) {
-        const url = `http://127.0.0.1:3000/read/team?username=${menuContextValue.authentication.username}`;
+        const url = `https://projectbackendos-phi.vercel.app/read/team?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };
@@ -65,7 +65,7 @@ const TeamContent = () => {
     console.log("delete this bro");
 
     try {
-      const url = `http://127.0.0.1:3000/delete/team/${id}?username=${menuContextValue.authentication.username}`;
+      const url = `https://projectbackendos-phi.vercel.app/delete/team/${id}?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };

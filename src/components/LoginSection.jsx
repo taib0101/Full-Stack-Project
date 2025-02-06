@@ -33,7 +33,7 @@ const LoginSection = () => {
       body: JSON.stringify(formValue),
     };
 
-    const url = "http://127.0.0.1:3000/login";
+    const url = "https://projectbackendos-phi.vercel.app/login";
 
     try {
       const response = await fetch(url, payload);

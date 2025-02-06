@@ -14,7 +14,7 @@ const ServiceContent = () => {
   const readService = useCallback(async () => {
     try {
       if (menuContextValue.authentication.login) {
-        const url = `http://127.0.0.1:3000/read/service?username=${menuContextValue.authentication.username}`;
+        const url = `https://projectbackendos-phi.vercel.app/read/service?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };
@@ -65,7 +65,7 @@ const ServiceContent = () => {
     console.log("delete this bro");
 
     try {
-      const url = `http://127.0.0.1:3000/delete/service/${id}?username=${menuContextValue.authentication.username}`;
+      const url = `https://projectbackendos-phi.vercel.app/delete/service/${id}?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };

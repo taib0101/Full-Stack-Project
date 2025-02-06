@@ -6,20 +6,13 @@ import { Footer } from "../components/Footer";
 
 export const BlogPage = () => {
   const menuContextValue = useContext(MenuContext);
-  let [blogs, setBlogs] = useState([
-    { name: "Blog Post 1", description: "Short description of blog post 1." },
-    { name: "Blog Post 2", description: "Short description of blog post 2." },
-    { name: "Blog Post 3", description: "Short description of blog post 3." },
-    { name: "Blog Post 4", description: "Short description of blog post 4." },
-    { name: "Blog Post 5", description: "Short description of blog post 5." },
-    { name: "Blog Post 6", description: "Short description of blog post 6." },
-  ]);
+  let [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     if (menuContextValue.authentication.login) {
       const readBlog = async () => {
         try {
-          const url = `http://127.0.0.1:3000/read/blog?username=${menuContextValue.authentication.username}`;
+          const url = `https://projectbackendos-phi.vercel.app/read/blog?username=${menuContextValue.authentication.username}`;
           const payload = {
             method: "get",
           };
@@ -38,8 +31,35 @@ export const BlogPage = () => {
       };
 
       readBlog();
+    } else {
+      setBlogs([
+        {
+          name: "Blog Post 1",
+          description: "Short description of blog post 1.",
+        },
+        {
+          name: "Blog Post 2",
+          description: "Short description of blog post 2.",
+        },
+        {
+          name: "Blog Post 3",
+          description: "Short description of blog post 3.",
+        },
+        {
+          name: "Blog Post 4",
+          description: "Short description of blog post 4.",
+        },
+        {
+          name: "Blog Post 5",
+          description: "Short description of blog post 5.",
+        },
+        {
+          name: "Blog Post 6",
+          description: "Short description of blog post 6.",
+        },
+      ]);
     }
-  }, []);
+  }, [menuContextValue.authentication]);
 
   return (
     <div>

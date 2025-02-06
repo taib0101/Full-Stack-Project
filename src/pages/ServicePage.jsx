@@ -7,17 +7,13 @@ import { Footer } from "../components/Footer";
 export const ServicePage = () => {
   const menuContextValue = useContext(MenuContext);
 
-  let [services, setServices] = useState([
-    { name: "Web Development", description: "Build modern web applications." },
-    { name: "UI/UX Design", description: "Create beautiful user interfaces." },
-    { name: "SEO Optimization", description: "Improve website ranking." },
-  ]);
+  let [services, setServices] = useState([]);
 
   useEffect(() => {
     if (menuContextValue.authentication.login) {
       const readService = async () => {
         try {
-          const url = `http://127.0.0.1:3000/read/service?username=${menuContextValue.authentication.username}`;
+          const url = `https://projectbackendos-phi.vercel.app/read/service?username=${menuContextValue.authentication.username}`;
           const payload = {
             method: "get",
           };
@@ -36,8 +32,20 @@ export const ServicePage = () => {
       };
 
       readService();
+    } else {
+      setServices([
+        {
+          name: "Web Development",
+          description: "Build modern web applications.",
+        },
+        {
+          name: "UI/UX Design",
+          description: "Create beautiful user interfaces.",
+        },
+        { name: "SEO Optimization", description: "Improve website ranking." },
+      ]);
     }
-  }, []);
+  }, [menuContextValue.authentication]);
 
   return (
     <div>

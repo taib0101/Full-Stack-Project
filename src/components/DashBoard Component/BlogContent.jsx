@@ -14,7 +14,7 @@ const BlogContent = () => {
   const readBlog = useCallback(async () => {
     try {
       if (menuContextValue.authentication.login) {
-        const url = `http://127.0.0.1:3000/read/blog?username=${menuContextValue.authentication.username}`;
+        const url = `https://projectbackendos-phi.vercel.app/read/blog?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };
@@ -65,14 +65,14 @@ const BlogContent = () => {
     console.log("delete this bro");
 
     try {
-      const url = `http://127.0.0.1:3000/delete/blog/${id}?username=${menuContextValue.authentication.username}`;
+      const url = `https://projectbackendos-phi.vercel.app/delete/blog/${id}?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };
         const response = await fetch(url, payload);
         const fetchedData = await response.json();
 
-        console.log("fetched data :", fetchedData);
+        // console.log("fetched data :", fetchedData);
         if (fetchedData.status === "error")
           throw new Error(fetchedData.description);
 
