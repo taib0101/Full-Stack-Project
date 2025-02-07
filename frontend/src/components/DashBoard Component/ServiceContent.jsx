@@ -65,7 +65,7 @@ const ServiceContent = () => {
     console.log("delete this bro");
 
     try {
-      const url = `https://projectbackendos-phi.vercel.app/delete/service/${id}?username=${menuContextValue.authentication.username}`;
+      const url = `${menuContextValue.url}/delete/service/${id}?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };
