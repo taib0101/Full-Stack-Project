@@ -16,7 +16,7 @@ A full-stack web application built with React, Vite, TailwindCSS on the frontend
 
 ## 🚀 Live Demo
 
-- **Frontend Live Link:** [https://projectostad.netlify.app/](https://projectostad.netlify.app/)
+- **Frontend Live Link:** [https://fullstackproject0110.netlify.app/](https://fullstackproject0110.netlify.app/)
 - **Backend Live Link:** [https://project-backend-gilt-eight.vercel.app/](https://project-backend-gilt-eight.vercel.app/)
 
 ## Single User Information
