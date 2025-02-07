@@ -13,7 +13,7 @@ export const ServicePage = () => {
     if (menuContextValue.authentication.login) {
       const readService = async () => {
         try {
-          const url = `https://projectbackendos-phi.vercel.app/read/service?username=${menuContextValue.authentication.username}`;
+          const url = `${menuContextValue.url}/read/service?username=${menuContextValue.authentication.username}`;
           const payload = {
             method: "get",
           };

@@ -12,7 +12,7 @@ export const BlogPage = () => {
     if (menuContextValue.authentication.login) {
       const readBlog = async () => {
         try {
-          const url = `https://projectbackendos-phi.vercel.app/read/blog?username=${menuContextValue.authentication.username}`;
+          const url = `${menuContextValue.url}/read/blog?username=${menuContextValue.authentication.username}`;
           const payload = {
             method: "get",
           };

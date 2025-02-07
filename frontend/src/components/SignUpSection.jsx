@@ -3,8 +3,9 @@ import { NavLink } from "react-router-dom";
 import { MenuContext } from "../App";
 
 let formValue = {};
-
 const SignUpSection = () => {
+  const menuContextValue = useContext(MenuContext);
+
   const [signUpValue, setSignUpValue] = useState({
     username: "",
     password: "",
@@ -19,8 +20,6 @@ const SignUpSection = () => {
     formValue[event.target.name] = event.target.value;
   }, [signUpValue, setSignUpValue]);
 
-  const value = useContext(MenuContext);
-
   const handleForm = useCallback(async (event) => {
     event.preventDefault();
 
@@ -32,7 +31,7 @@ const SignUpSection = () => {
       body: JSON.stringify(formValue),
     };
 
-    const url = "https://projectbackendos-phi.vercel.app/signup";
+    const url = `${menuContextValue.url}/signup`;
 
     try {
       const response = await fetch(url, payload);
@@ -42,11 +41,11 @@ const SignUpSection = () => {
         window.alert("Duplicate username");
         throw new Error("Duplicate");
       }
-      value.handleParent({ login: true, username: signUpValue["username"] });
+      menuContextValue.handleParent({ login: true, username: signUpValue["username"] });
     } catch (error) {
       console.log(error.message);
     }
-  }, [signUpValue, value]);
+  }, [signUpValue, menuContextValue]);
 
   return (
     <>

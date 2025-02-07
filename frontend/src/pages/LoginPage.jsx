@@ -7,13 +7,13 @@ import { MenuContext } from "../App";
 import LoginSection from "../components/LoginSection";
 
 const LoginPage = () => {
-  const value = useContext(MenuContext);
+  const menuContextValue = useContext(MenuContext);
 
   return (
     <>
       <div>
         <Menu />
-        {value.width <= 1023 && (
+        {menuContextValue.width <= 1023 && (
           <div className={`fixed w-full bottom-0 left-0 z-[99] bg-white h-[50px]`}>
             <Navber />
           </div>

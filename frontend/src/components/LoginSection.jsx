@@ -11,7 +11,7 @@ const LoginSection = () => {
   });
   const [warning, setWarning] = useState(false);
 
-  const value = useContext(MenuContext);
+  const menuContextValue = useContext(MenuContext);
 
   const handleInput = useCallback((event) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ const LoginSection = () => {
       body: JSON.stringify(formValue),
     };
 
-    const url = "https://projectbackendos-phi.vercel.app/login";
+    const url = `${menuContextValue.url}/login`;
 
     try {
       const response = await fetch(url, payload);
@@ -46,11 +46,11 @@ const LoginSection = () => {
       }
       console.log("fetchedData :", fetchedData);
 
-      value.handleParent({ login: true, username: loginValue["username"] });
+      menuContextValue.handleParent({ login: true, username: loginValue["username"] });
     } catch (error) {
       console.log(error.message);
     }
-  }, [loginValue, value]);
+  }, [loginValue, menuContextValue]);
 
   return (
     <>

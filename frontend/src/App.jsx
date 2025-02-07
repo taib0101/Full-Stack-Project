@@ -12,6 +12,7 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 
 export const MenuContext = createContext();
 
+let url = "https://project-backend-gilt-eight.vercel.app";
 const App = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -40,7 +41,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <MenuContext.Provider value={{ width, authentication, handleParent }}>
+        <MenuContext.Provider value={{ width, authentication, handleParent, url }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />

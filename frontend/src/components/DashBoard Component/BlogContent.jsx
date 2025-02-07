@@ -14,7 +14,7 @@ const BlogContent = () => {
   const readBlog = useCallback(async () => {
     try {
       if (menuContextValue.authentication.login) {
-        const url = `https://projectbackendos-phi.vercel.app/read/blog?username=${menuContextValue.authentication.username}`;
+        const url = `${menuContextValue.url}/read/blog?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };
@@ -65,7 +65,7 @@ const BlogContent = () => {
     console.log("delete this bro");
 
     try {
-      const url = `https://projectbackendos-phi.vercel.app/delete/blog/${id}?username=${menuContextValue.authentication.username}`;
+      const url = `${menuContextValue.url}/delete/blog/${id}?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };

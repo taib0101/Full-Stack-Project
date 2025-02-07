@@ -6,7 +6,7 @@ export const AboutSection = ({ teamMembers }) => {
     <div className="container mx-auto p-6">
       {/* About Section */}
       <section className="text-center py-12">
-        <h2 className="text-4xl font-bold mb-4">About Us</h2>
+        <h2 className="text-4xl font-bold mb-4">About Me</h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           We are a passionate team of professionals dedicated to delivering
           innovative solutions. Our mission is to create impactful products that
@@ -25,7 +25,7 @@ export const AboutSection = ({ teamMembers }) => {
 
       {/* Team Section */}
       <section className="py-12">
-        <h2 className="text-4xl font-bold text-center ">Meet Our Team</h2>
+        <h2 className="text-4xl font-bold text-center ">Meet My Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {teamMembers.map((member, index) => (
             <div

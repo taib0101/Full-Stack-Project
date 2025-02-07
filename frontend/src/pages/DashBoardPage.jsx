@@ -7,11 +7,11 @@ import TeamContent from "../components/DashBoard Component/TeamContent";
 import ServiceContent from "../components/DashBoard Component/ServiceContent";
 
 const DashBoardPage = () => {
-  const value = useContext(MenuContext);
+  const menuContextValue = useContext(MenuContext);
   return (
     <>
       <Menu />
-      {value.width <= 1023 && (
+      {menuContextValue.width <= 1023 && (
         <div className={`fixed w-full bottom-0 left-0 bg-white h-[50px]`}>
           <Navber />
         </div>

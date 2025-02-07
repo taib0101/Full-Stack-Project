@@ -14,7 +14,7 @@ const ServiceContent = () => {
   const readService = useCallback(async () => {
     try {
       if (menuContextValue.authentication.login) {
-        const url = `https://projectbackendos-phi.vercel.app/read/service?username=${menuContextValue.authentication.username}`;
+        const url = `${menuContextValue.url}/read/service?username=${menuContextValue.authentication.username}`;
         const payload = {
           method: "get",
         };

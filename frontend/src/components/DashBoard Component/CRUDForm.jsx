@@ -63,10 +63,10 @@ const CRUDForm = ({ showFormObject, content, readData }) => {
       };
 
       showForm.addUpdate === "Update"
-        ? (url = `https://projectbackendos-phi.vercel.app/update/${content.toLowerCase()}/${
+        ? (url = `${menuContextValue.url}/update/${content.toLowerCase()}/${
             showForm.formValue.id
           }?username=${menuContextValue.authentication.username}`)
-        : (url = `https://projectbackendos-phi.vercel.app/create/${content.toLowerCase()}?username=${
+        : (url = `${menuContextValue.url}/create/${content.toLowerCase()}?username=${
             menuContextValue.authentication.username
           }`);
 

@@ -14,7 +14,7 @@ export const Footer = () => {
 
           {/* Column 3 */}
           <div className="text-center md:text-right">
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-4">Contact</h3>
             <p className="text-sm">
               Kazi-Para, Mirpur, Dhaka
               <br />

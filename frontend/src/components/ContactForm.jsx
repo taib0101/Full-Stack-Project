@@ -2,7 +2,7 @@ export const ContactForm = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-lg">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Contact Us</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Contact</h2>
         <form className="flex flex-col space-y-4">
           <input
             type="text"
