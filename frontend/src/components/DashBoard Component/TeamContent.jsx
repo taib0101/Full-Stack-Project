@@ -1,6 +1,6 @@
 import { useState, memo, useCallback, useContext, useEffect } from "react";
 import CRUDForm from "./CRUDForm";
-import { MenuContext } from "../../App";
+import { SubAppContext } from "../../SubApp";
 
 const TeamContent = () => {
   let [items, setItems] = useState([]);
@@ -9,16 +9,17 @@ const TeamContent = () => {
     addUpdate: "",
     formValue: {},
   });
-  const menuContextValue = useContext(MenuContext);
+  const SubAppContextValue = useContext(SubAppContext);
+  const { authentication, url } = SubAppContextValue;
 
   const readTeam = useCallback(async () => {
     try {
-      if (menuContextValue.authentication.login) {
-        const url = `${menuContextValue.url}/read/team?username=${menuContextValue.authentication.username}`;
+      if (authentication.login) {
+        const urll = `${url}/read/team?username=${authentication.username}`;
         const payload = {
           method: "get",
         };
-        const response = await fetch(url, payload);
+        const response = await fetch(urll, payload);
         const fetchedData = await response.json();
 
         // console.log("fetched data :", fetchedData);
@@ -39,12 +40,12 @@ const TeamContent = () => {
     } catch (error) {
       window.alert(error.message);
     }
-  }, [menuContextValue.authentication]);
+  }, [authentication]);
 
   useEffect(() => {
     readTeam();
   }, [readTeam]);
-  // console.log("user name :", menuContextValue);
+  // console.log("user name :", SubAppContextValue);
 
   // console.log("team id :", items[0]);
 
@@ -65,7 +66,7 @@ const TeamContent = () => {
     console.log("delete this bro");
 
     try {
-      const url = `${menuContextValue.url}/delete/team/${id}?username=${menuContextValue.authentication.username}`;
+      const url = `${url}/delete/team/${id}?username=${authentication.username}`;
         const payload = {
           method: "get",
         };

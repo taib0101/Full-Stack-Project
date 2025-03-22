@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { MenuContext } from "../App";
+import { SubAppContext } from "../SubApp";
 
 export const AboutSection = ({ teamMembers }) => {
   return (

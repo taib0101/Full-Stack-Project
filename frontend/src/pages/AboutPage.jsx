@@ -1,23 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import Menu, { Navber } from "../components/Menu";
-import { MenuContext } from "../App";
+import { SubAppContext } from "../SubApp";
 import { AboutSection } from "../components/AboutTeamSection";
 import { Footer } from "../components/Footer";
 
 export const AboutPage = () => {
-  const menuContextValue = useContext(MenuContext);
+  const SubAppContextValue = useContext(SubAppContext);
+  const { login, url, authentication } = SubAppContextValue;
 
   let [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
-    if (menuContextValue.authentication.login) {
+    if (login) {
       const readBlog = async () => {
         try {
-          const url = `${menuContextValue.url}/read/team?username=${menuContextValue.authentication.username}`;
+          const urll = `${url}/read/team?username=${authentication.username}`;
           const payload = {
             method: "get",
           };
-          const response = await fetch(url, payload);
+          const response = await fetch(urll, payload);
           const fetchedData = await response.json();
 
           // console.log("fetched data :", fetchedData);
@@ -40,21 +41,13 @@ export const AboutPage = () => {
         { name: "Bob Brown", description: "Developer" },
       ]);
     }
-  }, [menuContextValue.authentication]);
+  }, [authentication]);
 
-  const value = useContext(MenuContext);
+  const value = useContext(SubAppContext);
 
   return (
     <div>
       <Menu />
-      {value.width <= 1023 && (
-        <div
-          className={`fixed w-full bottom-0 left-0 z-[99] bg-white h-[50px]`}
-        >
-          <Navber />
-        </div>
-      )}
-
       <div className={`h-[100dvh] h-fit mt-12`}>
         <AboutSection teamMembers={teamMembers} />
       </div>

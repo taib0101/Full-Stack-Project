@@ -1,22 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import Menu, { Navber } from "../components/Menu";
-import { MenuContext } from "../App";
+import { SubAppContext } from "../SubApp";
 import { BlogSection } from "../components/BlogSection";
 import { Footer } from "../components/Footer";
 
 export const BlogPage = () => {
-  const menuContextValue = useContext(MenuContext);
+  const SubAppContextValue = useContext(SubAppContext);
+  const { authentication, url } = SubAppContextValue;
   let [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    if (menuContextValue.authentication.login) {
+    if (authentication.login) {
       const readBlog = async () => {
         try {
-          const url = `${menuContextValue.url}/read/blog?username=${menuContextValue.authentication.username}`;
+          const urll = `${url}/read/blog?username=${authentication.username}`;
           const payload = {
             method: "get",
           };
-          const response = await fetch(url, payload);
+          const response = await fetch(urll, payload);
           const fetchedData = await response.json();
 
           // console.log("fetched data :", fetchedData);
@@ -59,18 +60,11 @@ export const BlogPage = () => {
         },
       ]);
     }
-  }, [menuContextValue.authentication]);
+  }, [authentication]);
 
   return (
     <div>
       <Menu />
-      {menuContextValue.width <= 1023 && (
-        <div
-          className={`fixed w-full bottom-0 left-0 z-[99] bg-white h-[50px]`}
-        >
-          <Navber />
-        </div>
-      )}
 
       <div className={`flex flex-wrap items-center h-[100dvh]`}>
         <BlogSection blogs={blogs} />
